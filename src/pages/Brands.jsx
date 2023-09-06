@@ -11,7 +11,7 @@ const {getStockData} =useStockCall()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // CI=false
 
-  return <div>Firms</div>;
+  return <div>Brands</div>;
 };
 
 export default Brands;
