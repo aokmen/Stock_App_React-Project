@@ -9,14 +9,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import { CardHeader } from "@mui/material";
 import useStockCall from "../hooks/useStockCall";
 
-export default function FirmCard({firm}) {
+export default function BrandCard({brand}) {
     const {deleteStockData} = useStockCall()
-   
   return (
     <Card
       sx={{
-        minHeight: 380,
-        maxHeight: 380,
+        minHeight: 350,
+        maxHeight: 350,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -24,23 +23,21 @@ export default function FirmCard({firm}) {
       }}>
       {/* <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {firm.name}
+          {brand.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {firm.address}
+          {brand.address}
         </Typography>
       </CardContent> */}
-      <CardHeader title={firm.name} subheader={firm.address} />
+      <CardHeader title={brand.name} subheader={brand.address} />
       <CardMedia
         component="img"
         sx={{ height: 130, objectFit: "contain" }}
-        image={firm.image}
-        title={firm.name}
+        image={brand.image}
+        title={brand.name}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          Phone : {firm.phone}
-        </Typography>
+     
       </CardContent>
 
       <CardActions
@@ -52,7 +49,7 @@ export default function FirmCard({firm}) {
         }}>
         <EditIcon sx={{ cursor: "pointer", "&:hover": { color: "red" } }} />
         <DeleteOutlineIcon
-            onClick={()=> deleteStockData('firms',firm.id)}
+            onClick={()=> deleteStockData('brands', brand.id)}
           sx={{ cursor: "pointer", "&:hover": { color: "red" } }}
         />
       </CardActions>
