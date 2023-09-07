@@ -1,7 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFail, fetchStart, getSuccess } from '../features/stockSlice';
-import axios from 'axios';
-import { toastErrorNotify, toastSuccessNotify } from '../helper/ToastNotify';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFail, fetchStart, getSuccess,firmsSuccess } from "../features/stockSlice";
+import axios from "axios";
+import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
+
 
 const useStockCall = () => {
   const dispatch = useDispatch();
@@ -9,11 +11,47 @@ const useStockCall = () => {
 
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-
-const getStockData = async (url) => {
+  //   const getFirms = async () => {
+  //     dispatch(fetchStart());
+  //     try {
+  //       const url = "firms";
+  //       const { data } = await axios(`${BASE_URL}stock/${url}/`, {
+  //         headers: {
+  //           Authorization: `Token ${token}`,
+  //         },
+  //       });
+  //       console.log(data);
+  //       // dispatch(getSuccess({data, url:"firms"}))
+  //       dispatch(getSuccess({ data, url })); // {data:data,url:url}
+  //     } catch (error) {
+  //       dispatch(fetchFail());
+  //     }
+  //   };
+  //   const getBrands = async () => {
+  //     dispatch(fetchStart());
+  //     try {
+  //       const url = "brands";
+  //       const { data } = await axios(`${BASE_URL}stock/${url}/`, {
+  //         headers: {
+  //           Authorization: `Token ${token}`,
+  //         },
+  //       });
+  //       console.log(data);
+  //       // dispatch(getSuccess({data, url:"firms"}))
+  //       dispatch(getSuccess({ data, url })); // {data:data,url:url}
+  //     } catch (error) {
+  //       dispatch(fetchFail());
+  //     }
+  //   };
+  //* DRY
+  //! yukarıdaki gibi her seferinde yazmak yerine daha modüler bir yapı kurarak tek bir fonksiyonla bir den fazla get işlemini gerçekleştirebiliyoruz
+  /* -------------------------------------------------------------------------- */
+  /*                                getStockData                                */
+  /* -------------------------------------------------------------------------- */
+  
+  const getStockData = async url => {
     dispatch(fetchStart());
     try {
-      
       const { data } = await axios(`${BASE_URL}stock/${url}/`, {
         headers: {
           Authorization: `Token ${token}`,
@@ -26,29 +64,65 @@ const getStockData = async (url) => {
       dispatch(fetchFail());
     }
   };
- 
+
+  /* -------------------------------------------------------------------------- */
+  /*                                postFirmData                                */
+  /* -------------------------------------------------------------------------- */
+
+  const postFirmData = async(userInfo) => {
+
+    dispatch(fetchStart());
+    try { 
+      const {data} = await axios.post(`${BASE_URL}stock/firms/`,userInfo
+      ,{
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+       
+      }
+      )
+      dispatch(firmsSuccess({ data}));
+      
+      getStockData("firms");
+      toastSuccessNotify("Logout performed");
+      console.log(data);
+      
+    } catch (error) {
+      dispatch(fetchFail());
+      toastErrorNotify("Post can not be performed");
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                               deleteStockData                              */
+  /* -------------------------------------------------------------------------- */
   const deleteStockData = async (url,id) => {
     dispatch(fetchStart());
     try {
-      
       await axios.delete(`${BASE_URL}stock/${url}/${id}/`, {
         headers: {
           Authorization: `Token ${token}`,
         },
       });
-    
-      getStockData(url)
+     
+      getStockData(url);
       toastSuccessNotify(`${url} successfuly deleted!`);
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify(`${url} not successfuly deleted!`);
     }
-  }; 
+  };
 
-  return { getStockData,deleteStockData }
-}
+  return {
+    // getFirms,
+    //  getBrands,
+    getStockData,
+    deleteStockData,
+    postFirmData,
+  };
+};
 
-export default useStockCall
+export default useStockCall;
 
 // https://react.dev/learn/reusing-logic-with-custom-hooks
 
@@ -58,3 +132,18 @@ export default useStockCall
 //* custom hookslar parametre alabilirler.
 //? birden fazla değer veya fonksiyon paylaşabiliriz. Eğer tek bir değer veya fonskiyon paylaşacaksak return deger dememiz yeterli. Ama birden fazlaysa o zaman object içerisinde değerlerimi, fonksiyonlarımı paylaşabilirim.
 //? Tek değer paylaştığımızda kullancağımız componentte direk olarka çağırabiliriz. Ama birden fazla değer paylaşıyorsak kullanırken destructuring yapmalıyız.
+
+
+// const useFetch=(url)=>{
+//     const [mydata,setData] = useState([])
+
+//     const getData=()=>{
+//         const {data} = await axios(url)
+//         setData(data)
+//     }
+
+//     return {mydata}
+// }
+
+// home const {mydata,getData} = useFetch('https....lasdas')
+// products const {mydata,getData} = useFetch('https....fakestoreapi')
