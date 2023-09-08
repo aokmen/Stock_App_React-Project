@@ -1,9 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import FirmAdd from './FirmAdd';
+import BrandAdd from './BrandAdd';
 
 const style = {
   position: 'absolute',
@@ -17,7 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModalBrand() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -25,7 +24,8 @@ export default function BasicModal() {
   return (
     <div>
    
-      <Button variant="contained" onClick={handleOpen}>New Firm</Button>
+      <Button variant="contained" onClick={handleOpen}>New Brand</Button>
+      
       <Modal
         open={open}
         onClose={handleClose}
@@ -33,7 +33,7 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <FirmAdd/>
+          <BrandAdd/>
         </Box>
       </Modal>
     </div>
