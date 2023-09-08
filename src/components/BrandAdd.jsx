@@ -8,25 +8,21 @@ import useStockCall from '../hooks/useStockCall'
 export const firmSchema = object({
 
     name: string().required(),
-    address: string().required(),
-    phone: number().required(),
     image: string().required().url(), 
 })
 
-const FirmAdd = () => {
-    const {postFirmData} = useStockCall()
+const BrandAdd = () => {
+    const {postBrandData} = useStockCall()
   return (
     <div>
         <Formik
         initialValues={{
             name:"",
-            address:"",
-            phone:"",
             image:"",
         }}
         validationSchema={firmSchema}
         onSubmit={(values,actions) => {
-             postFirmData(values);
+             postBrandData(values);
               actions.resetForm();
               actions.setSubmitting(true);
             console.log(values);
@@ -54,24 +50,6 @@ const FirmAdd = () => {
                     helperText={touched.name && errors.name}
                   />
                     <TextField
-                    name="address"
-                    label="Address"
-                    value={values.address}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.address && Boolean(errors.address)} //error:true or false
-                    helperText={touched.address && errors.address}
-                  />
-                    <TextField
-                    name="phone"
-                    label="Phone"
-                    value={values.phone}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.phone && Boolean(errors.phone)} //error:true or false
-                    helperText={touched.phone && errors.phone}
-                  />
-                    <TextField
                     name="image"
                     label="Image"
                     value={values.image}
@@ -90,4 +68,4 @@ const FirmAdd = () => {
   )
 }
 
-export default FirmAdd
+export default BrandAdd
