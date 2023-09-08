@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFail, fetchStart, getSuccess,firmsSuccess } from "../features/stockSlice";
+import { fetchFail, fetchStart, getSuccess} from "../features/stockSlice";
 import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 
@@ -81,10 +81,37 @@ const useStockCall = () => {
        
       }
       )
-      dispatch(firmsSuccess({ data}));
+      // dispatch(firmsSuccess({ data}));
       
       getStockData("firms");
-      toastSuccessNotify("Logout performed");
+      toastSuccessNotify("Post performed");
+      console.log(data);
+      
+    } catch (error) {
+      dispatch(fetchFail());
+      toastErrorNotify("Post can not be performed");
+    }
+  }
+  /* -------------------------------------------------------------------------- */
+  /*                                postBrandData                               */
+  /* -------------------------------------------------------------------------- */
+
+  const postBrandData = async(userInfo) => {
+
+    dispatch(fetchStart());
+    try { 
+      const {data} = await axios.post(`${BASE_URL}stock/brands/`,userInfo
+      ,{
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+       
+      }
+      )
+      // dispatch(firmsSuccess({ data}));
+      
+      getStockData("brands");
+      toastSuccessNotify("Post performed");
       console.log(data);
       
     } catch (error) {
@@ -119,6 +146,7 @@ const useStockCall = () => {
     getStockData,
     deleteStockData,
     postFirmData,
+    postBrandData
   };
 };
 

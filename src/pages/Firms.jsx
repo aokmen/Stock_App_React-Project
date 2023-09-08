@@ -5,7 +5,7 @@ import Container from "@mui/material/Container"
 import { Button, Dialog, Grid, Modal, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import FirmCard from "../components/FirmCard";
-import BasicModal from "../components/Modals";
+import BasicModal from "../components/ModalsFirm";
 
 
 const Firms = () => {
