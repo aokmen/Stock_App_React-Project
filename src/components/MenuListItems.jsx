@@ -69,12 +69,8 @@ const MenuListItems = () => {
     <List>
       {internalLinks.map((item, index) => (
         <ListItem key={item.title} disablePadding>
-          <ListItemButton
-            onClick={() => navigate(item.url)}
-            sx={iconStyle}>
-            <ListItemIcon >
-              {item.icon}
-            </ListItemIcon>
+          <ListItemButton onClick={() => navigate(item.url)} sx={iconStyle}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.title} />
           </ListItemButton>
         </ListItem>
@@ -82,7 +78,7 @@ const MenuListItems = () => {
       {isAdmin &&
         externalLinks.map((item, index) => (
           <ListItem key={item.title} disablePadding>
-            <ListItemButton to={item.url} target="true">
+            <ListItemButton sx={iconStyle} to={item.url} target="true">
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.title} />
             </ListItemButton>
