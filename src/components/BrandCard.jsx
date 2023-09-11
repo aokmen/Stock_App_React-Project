@@ -1,58 +1,51 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import { CardHeader } from "@mui/material";
 import useStockCall from "../hooks/useStockCall";
+import { btnStyle, flex } from "../styles/globalStyle";
 
-export default function BrandCard({brand}) {
-    const {deleteStockData} = useStockCall()
+const BrandCard = ({ brand, handleOpen, setInfo }) => {
+  const { deleteStockData } = useStockCall();
+
   return (
     <Card
+      elevation={10}
       sx={{
-        minHeight: 350,
-        maxHeight: 350,
+        p: 2,
+        width: "300px",
+        height: "400px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        padding: "0.5rem",
       }}>
-      {/* <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {brand.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {brand.address}
-        </Typography>
-      </CardContent> */}
-      <CardHeader title={brand.name} subheader={brand.address} />
-      <CardMedia
-        component="img"
-        sx={{ height: 130, objectFit: "contain" }}
-        image={brand.image}
-        title={brand.name}
-      />
-      <CardContent>
-     
-      </CardContent>
+      <CardHeader title={brand?.name} />
 
-      <CardActions
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 2,
-        }}>
-        <EditIcon sx={{ cursor: "pointer", "&:hover": { color: "red" } }} />
+      <CardMedia
+        image={brand?.image}
+        sx={{ p: 1, objectFit: "contain", height: "250px" }}
+        component="img"
+        alt={brand?.name}
+        title={brand?.name}
+      />
+
+      <CardActions sx={flex}>
+        <EditIcon
+          sx={btnStyle}
+          onClick={() => {
+            setInfo(brand);
+            handleOpen();
+          }}
+        />
         <DeleteOutlineIcon
-            onClick={()=> deleteStockData('brands', brand.id)}
-          sx={{ cursor: "pointer", "&:hover": { color: "red" } }}
+          sx={btnStyle}
+          onClick={() => deleteStockData("brands", brand.id)}
         />
       </CardActions>
     </Card>
   );
-}
+};
+
+export default BrandCard;
