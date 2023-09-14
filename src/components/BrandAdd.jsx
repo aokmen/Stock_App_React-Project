@@ -2,7 +2,7 @@ import { Box, Button, TextField } from '@mui/material'
 import { Form, Formik } from 'formik'
 import React from 'react'
 
-import { number,object, string } from 'yup'
+import { object, string } from 'yup'
 import useStockCall from '../hooks/useStockCall'
 
 export const firmSchema = object({
