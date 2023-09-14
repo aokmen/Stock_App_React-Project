@@ -47,7 +47,7 @@ const Firms = () => {
       image: "",
       address: "",
     });
-  };
+  }
   const [info, setInfo] = useState({
     name: "",
     phone: "",

@@ -3,16 +3,7 @@ import authReducer from "../features/authSlice";
 import stockReducer from "../features/stockSlice";
 // import { persistStore, persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
 const persistConfig = {
   key: "root",// storage veriler key-value şeklinde saklanır. Buraki key storagedaki keyi temsil ediyor.
