@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Stock App
 
 # Formik ve Yup
@@ -149,3 +150,8 @@ Ama nested routelarda alt yollarıda absolute path ile tanımlamak istersek o za
 ```
 
 d
+=======
+# Stock_App_React-Project   
+    
+    
+>>>>>>> 5cc82fce7351222b3ef91d9e049847a32416eb19
