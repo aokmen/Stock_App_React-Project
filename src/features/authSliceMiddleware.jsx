@@ -4,6 +4,9 @@ import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+/* -------------------------------------------------------------------------- */
+/*                              createAsyncThunk                              */
+/* -------------------------------------------------------------------------- */
 // Kullanıcı oturumu açma işlemi için createAsyncThunk kullanıyoruz.
 export const loginAsync = createAsyncThunk(
   "auth/login",
@@ -22,7 +25,9 @@ export const loginAsync = createAsyncThunk(
     }
   }
 );
-
+/* -------------------------------------------------------------------------- */
+/*                                registerAsync                               */
+/* -------------------------------------------------------------------------- */
 // Kullanıcı kayıt işlemi için createAsyncThunk kullanıyoruz.
 export const registerAsync = createAsyncThunk(
   "auth/register",
@@ -46,7 +51,9 @@ export const registerAsync = createAsyncThunk(
     }
   }
 );
-
+/* -------------------------------------------------------------------------- */
+/*                              createAsyncThunk                              */
+/* -------------------------------------------------------------------------- */
 export const logoutAsync = createAsyncThunk(
   "auth/logout",
   async (_, { dispatch, getState }) => {
@@ -64,7 +71,9 @@ export const logoutAsync = createAsyncThunk(
     }
   }
 );
-
+/* -------------------------------------------------------------------------- */
+/*                                 createSlice                                */
+/* -------------------------------------------------------------------------- */
 const authSlice = createSlice({
   name: "auth",
   initialState: {

@@ -14,7 +14,7 @@ const useAuthCall = () => {
     dispatch(loginAsync(userInfo))
       .then(res => {//!.then yapısını kullanarak yazdığımız loginAsync metodunun durumunu yakalıyoruz. Ona göre useri ilgili sayfaya yönlendirme yapıyoruz.
         console.log(res)// isteğin durumunu bize söylüyor.
-        if (res.meta.requestStatus === "fulfilled") {// istek başarılı olduysa yönlendirmeyi yap diyoruz. useNavigatei createAsyncThunk içeriisnde kullanamıyoruz. Bu yöntem yerine navigate metodunu parametre ile loginAsynca e de yollayabiliriz.
+        if (res.meta.requestStatus === "fulfilled") {// istek başarılı olduysa yönlendirmeyi yap diyoruz. useNavigatei createAsyncThunk içeriisnde kullanamıyoruz.
           navigate("/stock");
         }
       })

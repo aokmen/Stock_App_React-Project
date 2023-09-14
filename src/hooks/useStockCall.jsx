@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
+import { fetchFail, fetchStart, getProCatBrandSuccess,getPurSalesSuccess, getSuccess,getPurchaseSuccess,getSaleSuccess } from "../features/stockSlice";
 import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import useAxios from "./useAxios";
@@ -47,6 +47,9 @@ const useStockCall = () => {
   //   };
   //* DRY
   //! yukarıdaki gibi her seferinde yazmak yerine daha modüler bir yapı kurarak tek bir fonksiyonla bir den fazla get işlemini gerçekleştirebiliyoruz
+  /* -------------------------------------------------------------------------- */
+  /*                                getStockData                                */
+  /* -------------------------------------------------------------------------- */
   const getStockData = async url => {
     dispatch(fetchStart());
     try {
@@ -63,6 +66,9 @@ const useStockCall = () => {
       dispatch(fetchFail());
     }
   };
+  /* -------------------------------------------------------------------------- */
+  /*                               deleteStockData                              */
+  /* -------------------------------------------------------------------------- */
   //! istek atarken ortak olan base_url  ve token gibi değerleri her seferinde yazmak yerine axios instance kullanarak bunları orada tanımlıyoruz. Ve sonrasında sadece istek atmak istediğimiz end pointi yazmamız yeterli oluyor.
   const deleteStockData = async (url, id) => {
     dispatch(fetchStart());
@@ -80,7 +86,9 @@ const useStockCall = () => {
       toastErrorNotify(`${url} not successfuly deleted!`);
     }
   };
-
+  /* -------------------------------------------------------------------------- */
+  /*                                postStockData                               */
+  /* -------------------------------------------------------------------------- */
   const postStockData = async (url,info) => {
     dispatch(fetchStart());
     try {
@@ -93,11 +101,13 @@ const useStockCall = () => {
       toastErrorNotify(`${url} not successfuly created!`);
     }
   };
-
-  const putStockData = async (url, info) => {
+  /* -------------------------------------------------------------------------- */
+  /*                                putStockData                                */
+  /* -------------------------------------------------------------------------- */
+  const putStockData = async (url,info) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.put(`stock/${url}/${info.id}/`, info);
+      await axiosWithToken.put(`stock/${url}/${info.id}/`,info);
 
       getStockData(url);
       toastSuccessNotify(`${url} successfuly updated!`);
@@ -106,7 +116,73 @@ const useStockCall = () => {
       toastErrorNotify(`${url} not successfuly updated!`);
     }
   };
+/* -------------------------------------------------------------------------- */
+/*                                 Promise.all                                */
+/* -------------------------------------------------------------------------- */
 
+
+/* -------------------------------------------------------------------------- */
+/*                               getProCatBrand                               */
+/* -------------------------------------------------------------------------- */
+const getProCatBrand= async () => {
+  dispatch(fetchStart());
+  try {
+    // const [a,b,c] = [1,2,3]// deişken atama
+
+    // const products = axiosWithToken(`stock/products`);
+    // const [products, brands, categories] = await Promise.all([
+    //   axiosWithToken(`stock/products/`),
+    //   axiosWithToken(`stock/brands/`),
+    //   axiosWithToken(`stock/categories/`),
+    // ]);
+    const [products, brands, categories] = await Promise.all(['products','brands','categories'].map(item=> axiosWithToken(`stock/${item}/`)));
+
+   dispatch(getProCatBrandSuccess([products?.data, brands?.data, categories?.data]));
+  } catch (error) {
+    dispatch(fetchFail());
+  }
+};
+/* -------------------------------------------------------------------------- */
+/*                               getPurchaseData                              */
+/* -------------------------------------------------------------------------- */
+const getPurchaseData= async () => {
+  dispatch(fetchStart());
+  try {
+   
+    const [firms, brands, products,purchases] = await Promise.all(['firms','brands','products','purchases'].map(item=> axiosWithToken(`stock/${item}/`)));
+
+   dispatch(getPurchaseSuccess([firms?.data, brands?.data, products?.data,purchases?.data]));
+  } catch (error) {
+    dispatch(fetchFail());
+  }
+};
+/* -------------------------------------------------------------------------- */
+/*                                 getSaleData                                */
+/* -------------------------------------------------------------------------- */
+const getSaleData= async () => {
+  dispatch(fetchStart());
+  try {
+   
+    const [sales, brands, products] = await Promise.all(['sales','brands','products'].map(item=> axiosWithToken(`stock/${item}/`)));
+
+   dispatch(getSaleSuccess([sales?.data, brands?.data, products?.data]));
+  } catch (error) {
+    dispatch(fetchFail());
+  }
+};
+const getPurSales = async () => {
+  dispatch(fetchStart());
+  try {
+    const [purchases, sales] = await Promise.all([
+      axiosWithToken.get(`stock/purchases/`),
+      axiosWithToken.get(`stock/sales/`),
+    ]);
+
+    dispatch(getPurSalesSuccess([purchases?.data, sales?.data]));
+  } catch (error) {
+    dispatch(fetchFail());
+  }
+};
   return {
     // getFirms,
     //  getBrands,
@@ -114,8 +190,13 @@ const useStockCall = () => {
     deleteStockData,
     postStockData,
     putStockData,
+    getProCatBrand,
+    getPurchaseData,
+    getSaleData,
+    getPurSales
   };
 };
+
 
 export default useStockCall;
 

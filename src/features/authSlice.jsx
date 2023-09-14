@@ -46,6 +46,7 @@ export const {
   registerSuccess,
   fetchFail,
 } = authSlice.actions;
+
 export default authSlice.reducer;
 
 // async-thunk yerine manuel dispatclerle yapıyoruz. extra reducerlarla yapmadan da bu şekilde yapabiliyoruz. İki yönteminde avantajı ve dezavantajı var.

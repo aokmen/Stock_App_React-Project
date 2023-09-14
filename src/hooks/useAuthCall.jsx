@@ -11,7 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 
-const useAuthCall = () => {
+/* -------------------------------------------------------------------------- */
+/*                                 useAuthCall                                */
+/* -------------------------------------------------------------------------- */
+
+  const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useSelector(state => state.auth);
@@ -20,21 +24,26 @@ const useAuthCall = () => {
 
   const login = async userInfo => {
     dispatch(fetchStart());
-    try {
-      const { data } = await axios.post(
+
+    try {const { data } = await axios.post(
         `${BASE_URL}account/auth/login/`,
-        userInfo
-      );
+        userInfo );
+
       dispatch(loginSuccess(data));
       toastSuccessNotify("Login performed");
       navigate("/stock");
       console.log(data);
+
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
-toastErrorNotify("Login can not be performed");
+      toastErrorNotify("Login can not be performed");
     }
   };
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   logout                                   */
+  /* -------------------------------------------------------------------------- */
 
   const logout = async () => {
     dispatch(fetchStart());
@@ -55,6 +64,10 @@ toastErrorNotify("Login can not be performed");
       toastErrorNotify("Logout can not be performed");
     }
   };
+
+  /* -------------------------------------------------------------------------- */
+  /*                                  register                                  */
+  /* -------------------------------------------------------------------------- */
 
   const register = async userInfo => {
     dispatch(fetchStart());
