@@ -6,7 +6,7 @@ import useStockCall from "../hooks/useStockCall";
 import Container from "@mui/material/Container";
 import { Button,Typography } from "@mui/material";
 import PurchaseModal from "../components/modals/PurchaseModal";
-import PurchaseTable from "../components/PurchaseTable";
+import PurchaseTable from "../components/tables/PurchaseTable";
 
 const Purchases = () => {
  

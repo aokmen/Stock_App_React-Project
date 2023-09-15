@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import useStockCall from "../hooks/useStockCall";
 import Container from "@mui/material/Container";
 import { Button,Typography } from "@mui/material";
-import SaleTable from "../components/SaleTable";
+import SaleTable from "../components/tables/SaleTable";
 import SaleModal from "../components/modals/SaleModal";
 
 const Sales = () => {
