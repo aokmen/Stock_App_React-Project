@@ -4,7 +4,7 @@
 <img alt="alt_text" src="./stockapp.gif"/>
 
 
-# Stock Management System
+# Stock Management System 
 
 ## Overview
 The Stock Management System is a web application designed to manage inventory and sales data. It provides a user-friendly interface for tracking sales, profits, brands, and firms. This README.md file provides an overview of the project's main components and functionalities.
