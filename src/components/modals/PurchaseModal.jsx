@@ -22,7 +22,6 @@ const {firms, brands, products} = useSelector(state=>state.stock)
    setInfo({ ...info, [e.target.name]: e.target.value}); 
   };
 
-  console.log("info", info);
 
   const handleSubmit = e => {
     e.preventDefault();
