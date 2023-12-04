@@ -1,5 +1,5 @@
 # Project Name: Stock App React Redux
-<h3>Visit: https://stock-app-react-project.vercel.app/</h3>
+<h3>Visit: https://stock-frontend-six.vercel.app/</h3>
 
 <img alt="alt_text" src="./stockapp.gif"/>
 
