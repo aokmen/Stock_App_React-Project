@@ -83,7 +83,7 @@ The project uses data from an API, presumably related to sales and purchases. Th
 
 ## Components and Libraries
 - React: The project is built using the React library for building user interfaces.
-- Material-UI: Material-UI is used for styling and UI components.
+- Material-UI: Material-UI is used for styling and UI components. 
 - Tremor Chart: The Tremor Chart library is used for data visualization.
 - Redux Toolkit: Redux Toolkit might be used for state management, but the code snippets related to Redux are currently commented out.
 
