@@ -9,6 +9,12 @@
 ## Overview
 The Stock Management System is a web application designed to manage inventory and sales data. It provides a user-friendly interface for tracking sales, profits, brands, and firms. This README.md file provides an overview of the project's main components and functionalities.
 
+## Components and Libraries
+- React: The project is built using the React library for building user interfaces.
+- Material-UI: Material-UI is used for styling and UI components. 
+- Tremor Chart: The Tremor Chart library is used for data visualization.
+- Redux Toolkit: Redux Toolkit might be used for state management, but the code snippets related to Redux are currently commented out.
+
 ## Dashboard
 ### Home Component
 - The `Home.js` component serves as the dashboard's landing page.
@@ -79,12 +85,7 @@ The `TremorChart.js` component is responsible for visualizing performance metric
 The project includes functions for formatting data, such as currency formatting for sales and profit values.
 
 ## Data Source
-The project uses data from an API, presumably related to sales and purchases. This data is used to populate the charts and tables.
+The project uses data from an API, related to sales and purchases. This data is used to populate the charts and tables.
 
-## Components and Libraries
-- React: The project is built using the React library for building user interfaces.
-- Material-UI: Material-UI is used for styling and UI components. 
-- Tremor Chart: The Tremor Chart library is used for data visualization.
-- Redux Toolkit: Redux Toolkit might be used for state management, but the code snippets related to Redux are currently commented out.
 
 
